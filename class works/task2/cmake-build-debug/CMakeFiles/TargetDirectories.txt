@@ -1,0 +1,3 @@
+C:/Users/user/Documents/algoritms(4 semester)/class works/task2/cmake-build-debug/CMakeFiles/task2.dir
+C:/Users/user/Documents/algoritms(4 semester)/class works/task2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/user/Documents/algoritms(4 semester)/class works/task2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
