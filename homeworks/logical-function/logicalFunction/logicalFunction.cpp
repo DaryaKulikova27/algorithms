@@ -1,4 +1,5 @@
 ﻿/*
+4.8 (7) Логическая функция
 Недавно на уроке информатики ученики одного из классов изучили логические или булевы функции. Напомним, что булева функция f сопоставляет значениям двух булевых аргументов, каждый из которых может быть равен 0 или 1, третье булево значение, называемое результатом. Для учеников, которые выразили желание более подробно изучать эту тему, учительница информатики на дополнительном уроке ввела в рассмотрение понятие цепного вычисления булевой функции f.
 Если задана булева функция f и набор из N булевых значений a1, a2, ..., aN , то результат цепного вычисления этой булевой функции определяется следующим образом:
 если N = 1, то он равен a1;
@@ -30,51 +31,50 @@ void FindWaysToGetUnit(std::string currentSequence, int step, int currentSelecti
 
 int main()
 {
-	ifstream inputFile("input.txt");
-	ofstream outputFile("output.txt");
-	int n;
-	char value;
-	inputFile >> n;
-	for (int i = 0; i < 4; i++)
-	{
-		inputFile >> value;
-		pValues.push_back(value - '0');
-	}
-	
-	
-	/*for (int i = 0; i < 4; i++)
-	{
-		std::cout << pValues[i] << " ";
-	}*/
-	
+    ifstream inputFile("input.txt");
+    ofstream outputFile("output.txt");
+    int n;
+    char value;
+    inputFile >> n;
+    for (int i = 0; i < 4; i++)
+    {
+        inputFile >> value;
+        pValues.push_back(value - '0');
+    }
 
-	string resultSequence = "";
-	int maxOnes = 0;
-	FindWaysToGetUnit("", 1, 1, n, maxOnes, resultSequence);
-	if (maxOnes) outputFile << resultSequence;
-	else outputFile << "No";
 
-	return 0;
+    /*for (int i = 0; i < 4; i++)
+    {
+        std::cout << pValues[i] << " ";
+    }*/
+
+
+    string resultSequence = "";
+    int maxOnes = 0;
+    FindWaysToGetUnit("", 1, 1, n, maxOnes, resultSequence);
+    if (maxOnes) outputFile << resultSequence;
+    else outputFile << "No";
+
+    return 0;
 }
 
 void FindWaysToGetUnit(std::string currentSequence, int step, int currentSelection, int n, int& maxOnes, std::string& resultSequence)
 {
-	int countOnes = 0;
-	if (step == n)
-	{
-		currentSequence += to_string(currentSelection);
-		for (int i = 0; i < currentSequence.size(); i++)
-			if (currentSequence[i] == '1') countOnes++;
-		if (countOnes > maxOnes) 
-		{
-			maxOnes = countOnes;
-			resultSequence = currentSequence;
-		}
-		return;
-	}
+    int countOnes = 0;
+    if (step == n)
+    {
+        currentSequence = to_string(currentSelection) + currentSequence;
+        for (int i = 0; i < currentSequence.size(); i++)
+            if (currentSequence[i] == '1') countOnes++;
+        if (countOnes > maxOnes)
+        {
+            maxOnes = countOnes;
+            resultSequence = currentSequence;
+        }
+        return;
+    }
 
-	for (int i = 0; i < 4; i++)
-		if (pValues[i] == currentSelection) 
-			FindWaysToGetUnit(to_string(i & 1) + currentSequence, step + 1, (i & 0b10) ? 1 : 0, n, maxOnes, resultSequence);
+    for (int i = 0; i < 4; i++)
+        if (pValues[i] == currentSelection)
+            FindWaysToGetUnit(to_string(i & 1) + currentSequence, step + 1, (i & 0b10) ? 1 : 0, n, maxOnes, resultSequence);
 }
-
